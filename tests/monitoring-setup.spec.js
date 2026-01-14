@@ -28,8 +28,9 @@ test('Verify Monitoring Suite is Properly Configured', async () => {
     expect(configContent).toContain('video');
 
     // 4. Check environment variables
-    expect(process.env.EMAIL_PASS || process.env.EMAIL_USER || true).toBeDefined();
-
+  // 4. Check environment variables (optional - not all environments need email setup)
+  // For production environments, ensure EMAIL_USER and EMAIL_PASS are configured
+  // Note: Email functionality will be disabled if credentials are not provided
     // 5. Check that BackendChecks exists
     const backendPath = path.join(__dirname, '../.github/workflows/services/BackendChecks.js');
     expect(fs.existsSync(backendPath)).toBe(true);
